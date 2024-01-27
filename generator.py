@@ -20,33 +20,35 @@ def generate_satellite(i):
 def generate_all_users(num_exclusive_users, satellites, total_time=300):
     exclusive_windows_all_users = []
     users = []
+    available_priorities = list(range(1, num_exclusive_users + 2))  # +2 pour inclure le planificateur central
 
-    # S'assurer qu'il y a suffisamment de satellites pour les utilisateurs exclusifs
     if num_exclusive_users > len(satellites):
         raise ValueError("Il n'y a pas assez de satellites pour le nombre d'utilisateurs exclusifs")
 
     exclusive_satellites = random.sample(satellites, num_exclusive_users)
 
-    # Générer des utilisateurs exclusifs avec des fenêtres non-chevauchantes et associer chaque utilisateur à un satellite
     for i, satellite in enumerate(exclusive_satellites, start=1):
         exclusive_windows = generate_exclusive_windows(8, (15, 20), total_time, exclusive_windows_all_users)
         exclusive_windows_all_users.extend(exclusive_windows)
-        windows_for_user = [(satellite["id"], start, end) for start, end in exclusive_windows]  # Format des fenêtres exclusives
+        priority = random.choice(available_priorities)
+        available_priorities.remove(priority)
+        windows_for_user = [(satellite["id"], start, end) for start, end in exclusive_windows]
         users.append({
             "id": f"exclusive_user_{i}",
             "satellite": satellite["id"],
             "exclusive_windows": windows_for_user,
-            "priority": random.randint(10, 50)
+            "priority": priority
         })
 
+    # Priorité du planificateur central : la plus haute (ou la plus basse selon l'interprétation)
+    central_planner_priority = available_priorities[0]  # Ici, la plus basse des priorités restantes
     users.append({
-        "id": "central_planner",  # Identifiant pour le planificateur central
+        "id": "central_planner",
         "exclusive_windows": [],
-        "priority": random.randint(1, 5)
+        "priority": central_planner_priority
     })
 
     return users
-
 
 def generate_exclusive_windows(num_windows, window_length_range, total_time, existing_windows):
     windows = []
@@ -80,7 +82,13 @@ def generate_request(user, satellites, task_id, request_time_window=(0, 300)):
     t_end_r = t_start_r + random.uniform(10, 20)
     duration = 5
     reward = random.randint(10, 50) if user["priority"] >= 10 else random.randint(1, 5)
-    gps_position = (random.uniform(-90, 90), random.uniform(-180, 180))
+    
+    # Générer une position GPS en format LLA (Latitude, Longitude, Altitude)
+    latitude = random.uniform(-90, 90)
+    longitude = random.uniform(-180, 180)
+    altitude = random.uniform(0, 400)  # altitude en kilomètres
+
+    gps_position = (latitude, longitude, altitude)
 
     satellite_for_observation = user["satellite"] if "satellite" in user and user["satellite"] else random.choice(satellites)
 
@@ -106,8 +114,6 @@ def generate_request(user, satellites, task_id, request_time_window=(0, 300)):
     }
 
     return request
-
-
 
 
 def generate_EOSCSP_instance(num_satellites, num_exclusive_users, num_tasks_per_user):
