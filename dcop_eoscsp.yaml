@@ -1,0 +1,141 @@
+name: EOSCSP
+objective: min
+
+domains:
+  binary:
+    values: [0, 1]
+
+variables:
+  x_exclusive_user_1_obs_181:
+    domain: binary
+
+  x_exclusive_user_1_obs_182:
+    domain: binary
+
+  x_exclusive_user_1_obs_183:
+    domain: binary
+
+  x_exclusive_user_1_obs_184:
+    domain: binary
+
+  x_exclusive_user_1_obs_185:
+    domain: binary
+
+  x_exclusive_user_1_obs_186:
+    domain: binary
+
+  x_exclusive_user_1_obs_187:
+    domain: binary
+
+  x_exclusive_user_1_obs_188:
+    domain: binary
+
+  x_exclusive_user_1_obs_189:
+    domain: binary
+
+  x_exclusive_user_1_obs_190:
+    domain: binary
+
+constraints:
+  one_observation_obs_181:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_181]) <= 1'
+
+  one_observation_obs_182:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_182]) <= 1'
+
+  one_observation_obs_183:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_183]) <= 1'
+
+  one_observation_obs_184:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_184]) <= 1'
+
+  one_observation_obs_185:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_185]) <= 1'
+
+  one_observation_obs_186:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_186]) <= 1'
+
+  one_observation_obs_187:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_187]) <= 1'
+
+  one_observation_obs_188:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_188]) <= 1'
+
+  one_observation_obs_189:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_189]) <= 1'
+
+  one_observation_obs_190:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_190]) <= 1'
+
+  satellite_capacity_satellite_1:
+    type: intention
+    function: 'sum([]) <= 0'
+
+  satellite_capacity_satellite_2:
+    type: intention
+    function: 'sum([]) <= 0'
+
+  satellite_capacity_satellite_3:
+    type: intention
+    function: 'sum([]) <= 0'
+
+  satellite_capacity_satellite_4:
+    type: intention
+    function: 'sum([]) <= 0'
+
+  satellite_capacity_satellite_5:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_181,x_exclusive_user_1_obs_182,x_exclusive_user_1_obs_183,x_exclusive_user_1_obs_184,x_exclusive_user_1_obs_185,x_exclusive_user_1_obs_186,x_exclusive_user_1_obs_187,x_exclusive_user_1_obs_188,x_exclusive_user_1_obs_189,x_exclusive_user_1_obs_190]) <= 0'
+
+  one_agent_per_observation_obs_181:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_181]) <= 1'
+
+  one_agent_per_observation_obs_182:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_182]) <= 1'
+
+  one_agent_per_observation_obs_183:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_183]) <= 1'
+
+  one_agent_per_observation_obs_184:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_184]) <= 1'
+
+  one_agent_per_observation_obs_185:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_185]) <= 1'
+
+  one_agent_per_observation_obs_186:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_186]) <= 1'
+
+  one_agent_per_observation_obs_187:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_187]) <= 1'
+
+  one_agent_per_observation_obs_188:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_188]) <= 1'
+
+  one_agent_per_observation_obs_189:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_189]) <= 1'
+
+  one_agent_per_observation_obs_190:
+    type: intention
+    function: 'sum([x_exclusive_user_1_obs_190]) <= 1'
+
+agents:
+  - exclusive_user_1
